@@ -422,6 +422,37 @@ Run a few times a SQL statement to count all rows in the table to confirm the la
   
   [Cloudera Documentation](https://www.cloudera.com/documentation.html)
 </details>
+<details>
+  <summary>Dashboard</summary>
+  You can present a _poor-guy dashboard_ with netcat and impalad:
+  
+  Start with opening a new SSH session and make a new `impala.sh` shell script:
+  ```
+  #!/bin/bash
+echo "HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Server: netcat!
+
+<!doctype html>"
+echo '<html><head><meta http-equiv="refresh" content="5" ></head><body>'
+echo "<h1>PREDICTIVE MAINTENANCE DEMO</h1>"
+echo "<h3>LAST 10 UNHEALTHY SENSORS</h3>"
+echo "<pre>"
+impala-shell --quiet -q 'select sensor_id, sensor_ts from sensors where is_healthy = 0 order by sensor_ts desc limit 10;'
+echo "</pre>"
+echo "<h3>SENSORS INVENTORY</h3>"
+echo "<pre>"
+impala-shell --quiet -q 'select count(sensor_id), is_healthy from sensors group by is_healthy;'
+echo "</pre></body></html>"
+```
+
+  Then you can start a "webserver" on port 1500:
+  ```
+  while true ; do nc -l -p 1500 -e impala.sh; done
+  ```
+
+Your dashboard is located on http://public-hostname:1500
+</details>
 
 ## Troubleshooting
 <details>
