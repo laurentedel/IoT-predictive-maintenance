@@ -4,26 +4,7 @@
 
 In this and the following lab, you will wear the hat of a Data Scientist. You will write the model code, train it several times and finally deploy the model to Production. All within 30 minutes!
 
-Click on **Open Workbench** and start a Python3 Session
-
-![](./images/image19.png)
-
-Once the Engine is ready, run the following command to install some required libraries:
-```
-!pip3 install --upgrade pip scikit-learn
-```
-The project comes with an historical dataset. Copy this dataset into HDFS:
-```
-!hdfs dfs -put data/historical_iot.txt /user/$HADOOP_USER_NAME
-```
-
-![](./images/image22.png)
-
-You're now ready to run the Experiment to train the model on your historical data.
-
-You can stop the Engine at this point.
-
-**STEP 2** : Examine `cdsw.iot_exp.py`
+**Model** : Examine `cdsw.iot_exp.py`
 
 Open the file `cdsw.iot_exp.py`. This is a python program that builds a model to predict machine failure (the likelihood that this machine is going to fail). There is a dataset available on hdfs with customer data, including a failure indicator field.
 
