@@ -44,17 +44,12 @@ numTrees = 20 numDepth = 20
 ```
 From the menu, select `Run -> Run Experiments...`. Now, in the background, the Data Science Workbench environment will spin up a new docker container, where this program will run. 
 
-![](./images/image23.png)
 
 Go back to the **Projects** page in CDSW, and hit the **Experiments** button.
 
 If the Status indicates ‘Running’, you have to wait till the run is completed. In case the status is ‘Build Failed’ or ‘Failed’, check the log information. This is accessible by clicking on the run number of your experiments. There you can find the session log, as well as the build information.
 
-![](./images/image15.png)
-
 In case your status indicates ‘Success’, you should be able to see the auroc (Area Under the Curve) model quality indicator. It might be that this value is hidden by the CDSW user interface. In that case, click on the ‘3 metrics’ links, and select the auroc field. It might be needed to de-select some other fields, since the interface can only show 3 metrics at the same time.
-
-![](./images/image12.png)
 
 In this example, ~0.8478. Not bad, but maybe there are better hyper parameter values available.
 
@@ -68,14 +63,10 @@ NumTrees NumDepth
 ```
 When all runs have completed successfully, check which parameters had the best quality (best predictive value). This is represented by the highest ‘area under the curve’, auroc metric.
 
-![](./images/image27.png)
-
 **STEP 5** : Save the best model to your environment
 
 Select the run number with the best predictive value, in this case, experiment 2. In the Overview screen of the experiment, you can see that the model in spark format, is captured in the file `iot_model.pkl`. Select this file and hit the **Add to Project** button. This will copy the model to your project directory.
 
-![](./images/image13.png)
-![](./images/image1.png)
 
 ## Lab 2 - CDSW: Deploy the model
 
@@ -89,8 +80,6 @@ Before deploying the model, try it out in the Workbench: launch a Python3 engine
 ```
 predict({"feature": "0, 65, 0, 137, 21.95, 83, 19.42, 111, 9.4, 6, 3.43, 4"})
 ```
-
-![](./images/image18.png)
 
 The functions returns successfully, so we know we can now deploy the model. You can now stop the engine.
 
@@ -119,7 +108,6 @@ After the several minutes, your model should get to the **Deployed** state. Now,
 
 The green color with success is telling that our REST call to the model is technically working. And if you examine the response: `{“result”: 1}`, it returns a 1, which mean that machine with these features is likely to stay healthy.
 
-![](./images/image11.png)
 
 Now, lets change the input parameters and call the predict function again. Put the following values in the Input field:
 ```
@@ -147,5 +135,3 @@ $ spark-submit --master local[2] --jars kudu-spark2_2.11-1.9.0.jar,spark-core_2.
 ```
 
 Spark Streaming will flood your screen with log messages, however, at a 5 seconds interval, you should be able to spot a table: these are the messages that were consumed from Kafka and processed by Spark. YOu can configure Spark for a smaller time window, however, for this exercise 5 seconds is sufficient.
-
-![](./images/image20.png)
