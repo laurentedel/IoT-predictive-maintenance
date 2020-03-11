@@ -30,10 +30,10 @@ schemaData = StructType([StructField("0", DoubleType(), True),
                          StructField("11", DoubleType(), True),          
                          StructField("12", IntegerType(), True)])
 
-iot_data = spark.read.schema(schemaData).csv('/user/' 
-                                             + os.environ['HADOOP_USER_NAME'] 
-                                             + '/historical_iot.txt')
-
+#iot_data = spark.read.schema(schemaData).csv('/user/' 
+#                                             + os.environ['HADOOP_USER_NAME'] 
+#                                             + '/historical_iot.txt')
+iot_data = spark.read.schema(schemaData).csv('data/historical_iot.txt')
 
 # Create Pipeline
 label_indexer = StringIndexer(inputCol = '12', outputCol = 'label')
