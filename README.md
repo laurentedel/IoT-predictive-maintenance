@@ -106,7 +106,7 @@ If all parameters are set, you can hit the **Deploy Model** button. Wait till th
 
 After the several minutes, your model should get to the **Deployed** state. Now, click on the Model Name link, to go to the Model Overview page. From the that page, hit the **Test** button to check if the model is working.
 
-The green color with success is telling that our REST call to the model is technically working. And if you examine the response: `{“result”: 1}`, it returns a 1, which mean that machine with these features is likely to stay healthy.
+The green color with success is telling that our REST call to the model is technically working. And if you examine the response: `{"result": 1}`, it returns a 1, which mean that machine with these features is likely to stay healthy.
 
 
 Now, lets change the input parameters and call the predict function again. Put the following values in the Input field:
